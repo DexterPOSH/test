@@ -17,15 +17,4 @@ else {
 Get-PackageProvider -Name NuGet -ForceBootstrap | Out-Null
 Install-Module -Name Pester -Scope CurrentUser -Force -Verbose
 
-Describe 'testing PSSession at the one time initialization block' {
-    Write-Host "$(whoami.exe)"
-    Write-Host "Local administrators"
-    net localgroup administrators
-    
-    Write-host 'Trying to create PSSession'
-    $Session = New-PSSession -ComputerName localhost
-
-    It 'Should open a PSSession' {
-        $Session | Should NOT BeNullOrEmpty
-    }
-}
+Invoke-Pester .\test1.ps1
