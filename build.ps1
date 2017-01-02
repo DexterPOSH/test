@@ -13,3 +13,15 @@ if ($Session) {
 else {
   throw 'PSSession creation failed'
 }
+
+Get-PackageProvider -Name NuGet -ForceBootstrap | Out-Null
+Install-Module -Name Pester -Scope CurrentUser -Force -Verbose
+
+Describe 'testing PSSession at the one time initialization block' {
+    Write-host 'Trying to create PSSession'
+    $Session = New-PSSession -ComputerName localhost
+
+    It 'Should open a PSSession' {
+        $Session | Should NOT BeNullOrEmpty
+    }
+}
