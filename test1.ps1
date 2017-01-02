@@ -1,5 +1,10 @@
-#requires -runasadministrator
-if (([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] “Administrator”)) {
+function Test-IsAdmin {
+
+([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")
+
+}
+
+if (Test-IsAdmin) {
 
   Describe 'testing PSSession at the one time initialization block' {
 
