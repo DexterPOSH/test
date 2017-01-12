@@ -17,4 +17,12 @@ build: false
 #Kick off the CI/CD pipeline
 test_script:
   - ps: . .\build.ps1
-  
+
+#Publish to PowerShell Gallery with this key
+environment:
+  NuGetApiKey:
+    secure: 8KFB3k1SKhLLErPOZddrTEHJtTuPo06kgsE5ZZM1Heq7jq/Nwc7gi70LO86H6S92
+
+
+on_finish:
+  - ps: $blockRdp = $true; iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
